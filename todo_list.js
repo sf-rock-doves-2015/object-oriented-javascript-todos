@@ -1,3 +1,5 @@
+// Object-Oriented JS Todos
+
 var counter = 0;
 var Task = function(description) {
   counter++;
@@ -22,14 +24,25 @@ TodoList.prototype.add = function(description) {
   this.tasks.push(task);
 };
 
-// TodoList.prototype.remove = function(task) {
-//   var task_index = this.tasks.indexOf(task);
-//   tasks.splice(task_index, 1);
-// };
+var findIndex = function(nameOfObject, myArray) {
+  var indexWeWant;
+  for (var i=0; i<myArray.length; i++) {
+    if (myArray[i].description === nameOfObject) {
+      indexWeWant = i;
+    };
+  };
+  return indexWeWant;
+};
 
-// TodoList.prototype.complete = function() {
-//   completed = true;
-// };
+TodoList.prototype.remove = function(nameOfTask) {
+  var index = findIndex(nameOfTask, this.tasks);
+  this.tasks.splice(index, 1)
+};
+
+TodoList.prototype.complete = function(nameOfTask) {
+  var index = findIndex(nameOfTask, this.tasks);
+  this.tasks[index].completed = true;
+};
 
 // Driver code
 
