@@ -2,44 +2,53 @@
 
 var TodoList = function(){
   this.tasks = []
-  this.add = function(item){
+}
+
+TodoList.prototype.add = function(item){
     task = new Task(item, this);
     this.tasks.push(task)
-  }
-  this.list = function(){
-    for (i=0; i<this.tasks.length; i++){
-      console.log("id: " + i + " ");
-      console.log(this.tasks[i]);
-    }
-  }
-  this.indexOf = function(item) {
-    for (i=0; i<this.tasks.length; i++){
-      if (this.tasks[i].name === item){
-        return i;
-      }
-    }
-  }
-  this.remove = function(index){
-    this.tasks.splice(index, 1);
-  }
-  this.get = function(index) {
-    return this.tasks[index].name;
-  }
-
 }
+
+TodoList.prototype.list = function(){
+  for (i=0; i<this.tasks.length; i++){
+    console.log("id: " + i + " ");
+    console.log(this.tasks[i]);
+  }
+}
+
+TodoList.prototype.indexOf = function(item) {
+  for (i=0; i<this.tasks.length; i++){
+    if (this.tasks[i].name === item){
+      return i;
+    }
+  }
+}
+
+TodoList.prototype.remove = function(index){
+  this.tasks.splice(index, 1);
+}
+
+TodoList.prototype.get = function(index) {
+  return this.tasks[index].name;
+}
+
 
 var Task = function(name, parent) {
   this.name = name;
   this.completed = false;
-  this.complete = function() {
-    return this.completed = true;
-  }
   this.parent = parent;
-  this.remove = function() {
-    this.index_at_parent = this.parent.indexOf(this.name);
-    this.parent.remove(this.index_at_parent);
-  }
 }
+
+Task.prototype.complete = function() {
+  return this.completed = true;
+}
+
+Task.prototype.remove = function() {
+  this.index_at_parent = this.parent.indexOf(this.name);
+  this.parent.remove(this.index_at_parent);
+}
+
+
 
 // Driver code
 
