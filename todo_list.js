@@ -17,6 +17,8 @@ TodoList.prototype.add = function(item){
   this.tasks.push(new Task(item, this));
 };
 
+
+
 TodoList.prototype.list = function(){
   for(var i=0; i < this.tasks.length; i++) {
     console.log(this.tasks[i]);
