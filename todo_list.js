@@ -1,12 +1,13 @@
 var TodoList = function() {
-  this.items = [];
+  this.items = []
   this.tasks = this.items
 };
 
-var Task = function(id, item, list_object){
-  this.id = id,
-  this.description = item,
+var Task = function(id, item, parent){
+  this.id = id
+  this.description = item
   this.completed = false
+  this.parent = parent
 };
 
 Task.prototype.complete = function() {
@@ -14,7 +15,13 @@ Task.prototype.complete = function() {
 };
 
 Task.prototype.remove = function() {
-  list_object.items.slice(id-1,1);
+  //list_object.items.slice(id-1,1);
+  list_array = this.parent.items
+  for (var i=0; i<list_array.length; i++){
+    if (list_array[i] === this){
+      delete list_array[i]
+    }
+  }
 };
 
 TodoList.prototype.add = function(item){
