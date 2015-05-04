@@ -3,7 +3,7 @@ function TodoList() {
 }
 
 TodoList.prototype.add = function(item) {
-	var list_hash = {id: this.tasks.length, description: item, completed: false};
+	var list_hash = {id: this.tasks.length + 1, description: item, completed: false};
 	this.tasks.push(list_hash);
 };
 
@@ -13,9 +13,11 @@ TodoList.prototype.list = function() {
 	for(var x = 0; x < this.tasks.length; x++) {
 		console.log(this.tasks[x]);
 	}
-
-	// console.log(this.tasks);
 };
+
+// TodoList.prototype.complete = function() {
+
+// };
 
 // prototype is an instance of the superclass and creates
 // an instance of the object when a prototype function is
@@ -26,12 +28,14 @@ TodoList.prototype.list = function() {
 
 // Note we are using a JavaScript constructor now.
 var groceryList = new TodoList();
-console.log("this is the todolist prototype", TodoList.prototype);
+console.log('=======todolist prototype======');
+console.log(TodoList.prototype);
 groceryList.add('bread');
 groceryList.add('cheese');
 groceryList.add('milk');
 
 // tasks is now an array of Task objects
+console.log('=======tasks======');
 groceryList.tasks //-> [Task, Task, Task]
 
 groceryList.list();
@@ -41,25 +45,36 @@ groceryList.list();
 
 
 // // getting a task object
-// var breadTask = groceryList.tasks[0];
+var breadTask = groceryList.tasks[0];
+// console.log(breadTask);
 
-// breadTask.id //-> 1 (some unique numerical ID)
-// breadTask.description //-> 'bread'
-// breadTask.completed //-> false
+console.log('=======breadTask properties======');
+console.log(breadTask.id) //-> 1 (some unique numerical ID)
+console.log(breadTask.description) //-> 'bread'
+console.log(breadTask.completed) //-> false
 
 
 // // This should complete the task
-// breadTask.complete();
+breadTask.complete = function() {
+	this.completed = true;
+};
+breadTask.complete()
+// console.log(breadTask);
 
-// groceryList.list();
-// //> Task {id: 1, description: 'bread', completed: true}
-// //> Task {id: 2, description: 'cheese', completed: false}
-// //> Task {id: 3, description: 'milk', completed: false}
+console.log('=======completes task======');
+groceryList.list();
+//> Task {id: 1, description: 'bread', completed: true}
+//> Task {id: 2, description: 'cheese', completed: false}
+//> Task {id: 3, description: 'milk', completed: false}
 
 
-// // This should remove the task from the todo list
-// breadTask.remove();
+// This should remove the task from the todo list
+breadTask.remove = function() {
+	groceryList.tasks.splice(0, 1);
+};
 
-// groceryList.list();
+breadTask.remove();
+console.log('=======breadTask removed======');
+groceryList.list();
 //> Task {id: 2, description: 'cheese', completed: false}
 //> Task {id: 3, description: 'milk', completed: false}
