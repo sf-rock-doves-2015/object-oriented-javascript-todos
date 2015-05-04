@@ -15,10 +15,6 @@ TodoList.prototype.list = function() {
 	}
 };
 
-// TodoList.prototype.complete = function() {
-
-// };
-
 // prototype is an instance of the superclass and creates
 // an instance of the object when a prototype function is
 // added
