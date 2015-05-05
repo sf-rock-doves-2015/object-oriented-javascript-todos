@@ -7,18 +7,19 @@ Task = function(id, belongsTo, description, completed) {
     this.completed = true;
   };
   this.remove = function() {
-    this.belongsTo.remove((this.id - 1))
+    this.belongsTo.remove(this.belongsTo.tasks, this.description);
   };
 };
 
 TodoList = function() {
   this.tasks = [];
+  counter = 1
 };
 
 TodoList.prototype = {
 
   add: function(task) {
-    this.tasks.push(new Task((this.tasks.length + 1), this, task, false));
+    this.tasks.push(new Task((counter++), this, task, false));
   },
 
   list: function() {
@@ -27,9 +28,13 @@ TodoList.prototype = {
     };
   },
 
-  remove: function(item_index) {
-    this.tasks.splice(item_index, 1);
-    return this.tasks;
+  remove: function(tasks, description) {
+    for (i = 0; i < tasks.length; i++) {
+      if (tasks[i].description === description) {
+        this.tasks.splice(i, 1);
+        return this.tasks;
+      }
+    };
   }
 
 };
